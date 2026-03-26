@@ -12,11 +12,11 @@ from taskwiki.short import ShortUUID
 
 
 def convert_priority_from_tw_format(priority):
-    return {None: None, 'L': 1, 'M': 2, 'H': 3}[priority]
+    return {None: None, 'could': 1, 'should': 2, 'must': 3}[priority]
 
 
 def convert_priority_to_tw_format(priority):
-    return {0: None, 1: 'L', 2: 'M', 3: 'H'}[priority]
+    return {0: None, 1: 'could', 2: 'should', 3: 'must'}[priority]
 
 
 class VimwikiTask(object):
