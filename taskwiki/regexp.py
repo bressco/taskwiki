@@ -11,7 +11,7 @@ FINAL_SEGMENT_SEPARATOR_UNNAMED = r'(\s+|$)'
 SOURCE_INDICATOR = r'(?P<source>[A-Z]):'
 
 # Building blocks
-BRACKET_OPENING = re.escape('* [')
+BRACKET_OPENING = re.escape('- [')
 BRACKET_CLOSING = re.escape('] ')
 EMPTY_SPACE = r'(?P<space>\s*)'
 UUID = r'(?P<uuid>{0}|{1})'.format(UUID_UNNAMED, UUID_UNNAMED_SHORT)
