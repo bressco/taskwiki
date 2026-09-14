@@ -31,8 +31,8 @@ syntax cluster TaskWikiTaskContains
                 \ @Spell
 
 " Conceal the UUID
-execute 'syn match TaskWikiTaskUuid containedin=TaskWikiTask /\v#([A-Z]:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/'.s:conceal
-execute 'syn match TaskWikiTaskUuid containedin=TaskWikiTask /\v#([A-Z]:)?[0-9a-fA-F]{8}$/'.s:conceal
+execute 'syn match TaskWikiTaskUuid containedin=TaskWikiTask /\v%([A-Z]:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/'.s:conceal
+execute 'syn match TaskWikiTaskUuid containedin=TaskWikiTask /\v%([A-Z]:)?[0-9a-fA-F]{8}$/'.s:conceal
 highlight link TaskWikiTaskUuid Comment
 
 " Conceal header definitions
