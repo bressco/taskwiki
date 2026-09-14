@@ -3,7 +3,7 @@ import re
 # Unnamed building blocks
 UUID_UNNAMED = r'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
 UUID_UNNAMED_SHORT = r'[0-9a-fA-F]{8}'
-DUE_UNNAMED = r'\(\d{4}-\d\d-\d\d( \d\d:\d\d)?\)'
+DUE_UNNAMED = r'\d{4}-\d\d-\d\d( \d\d:\d\d)?'
 EXPIRES_UNNAMED = r'\d{4}-\d\d-\d\d( \d\d:\d\d)?'
 SPACE_UNNAMED = r'\s*'
 NONEMPTY_SPACE_UNNAMED = r'\s+'
