@@ -330,7 +330,7 @@ class VimwikiTask(object):
 
         return ''.join([
             self['indent'],
-            '* [',
+            '- [',
             self['completed_mark'],
             '] ',
             (self['description'].encode('utf-8') if six.PY2 else self['description'])
