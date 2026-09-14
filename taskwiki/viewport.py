@@ -352,8 +352,13 @@ class ViewPort(object):
         return to_add, to_del
 
     def load_tasks(self):
-        # Load all tasks below the viewport
-        for i in range(self.line_number + 1, len(self.cache.buffer)):
+        # Load all tasks below the viewport. A blank line right after the
+        # header acts as a separator from the task list and is skipped.
+        first_line = self.line_number + 1
+        if self.cache.buffer[first_line] == '':
+            first_line += 1
+
+        for i in range(first_line, len(self.cache.buffer)):
             line = self.cache.buffer[i]
             match = re.search(regexp.GENERIC_TASK, line)
 
@@ -400,12 +405,25 @@ class ViewPort(object):
         added_tasks = 0
         existing_tasks = len(self.tasks)
 
+        # Keep a blank separator line between the header and the task list,
+        # as long as the viewport has (or will have) any tasks.
+        if existing_tasks or to_add:
+            if self.cache.buffer[self.line_number + 1] != '':
+                self.cache.insert_line('', self.line_number + 1)
+        else:
+            if self.cache.buffer[self.line_number + 1] == '':
+                self.cache.remove_line(self.line_number + 1)
+
+        # A single blank separator line offsets the task list by one.
+        separator_offset = 1
+
         sorted_to_add = list(to_add)
         sorted_to_add.sort(key=lambda x: x['entry'])
 
         for task in sorted_to_add:
             added_tasks += 1
-            added_at = self.line_number + existing_tasks + added_tasks
+            added_at = (self.line_number + separator_offset
+                        + existing_tasks + added_tasks)
 
             # Add the task object to cache
             self.cache.task[short.ShortUUID(task['uuid'], self.tw)] = task
@@ -425,7 +443,14 @@ class ViewPort(object):
 
         if self.count is not None:
             for i in range(
-                self.line_number + self.count,
-                self.line_number + existing_tasks + added_tasks,
+                self.line_number + separator_offset + self.count,
+                self.line_number + separator_offset
+                + existing_tasks + added_tasks,
             ):
-                self.cache.remove_line(self.line_number + self.count + 1)
+                self.cache.remove_line(
+                    self.line_number + separator_offset + self.count + 1)
+
+        # If the viewport is left without any tasks, drop the blank
+        # separator line as well, so no orphan empty line is kept.
+        if not self.tasks and self.cache.buffer[self.line_number + 1] == '':
+            self.cache.remove_line(self.line_number + 1)
