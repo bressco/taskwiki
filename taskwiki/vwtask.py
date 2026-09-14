@@ -332,10 +332,10 @@ class VimwikiTask(object):
             self['indent'],
             '- [',
             self['completed_mark'],
-            '] ',
+            ']',
             due_str,
             ' ' + '!' * self.priority_from_tw_format if self['priority'] else '',
-            (self['description'].encode('utf-8') if six.PY2 else self['description'])
+            ' ' + (self['description'].encode('utf-8') if six.PY2 else self['description'])
                 if self['description'] else 'TEXT MISSING?',
             '  %' + self.uuid.vim_representation(self.cache) if self.uuid else '',
         ])
