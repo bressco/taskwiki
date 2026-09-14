@@ -32,7 +32,7 @@ GENERIC_TASK = re.compile(''.join([
     '(', PRIORITY, FINAL_SEGMENT_SEPARATOR_UNNAMED, ')?',
     '(', DUE, FINAL_SEGMENT_SEPARATOR_UNNAMED, ')?',
     '(',
-        '#',
+        '%',
         '(', SOURCE_INDICATOR, ')?',
         '(', UUID, ')?',
     ')?',  # UUID is not there for new tasks

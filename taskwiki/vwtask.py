@@ -337,7 +337,7 @@ class VimwikiTask(object):
                 if self['description'] else 'TEXT MISSING?',
             ' ' + '!' * self.priority_from_tw_format if self['priority'] else '',
             due_str,
-            '  #' + self.uuid.vim_representation(self.cache) if self.uuid else '',
+            '  %' + self.uuid.vim_representation(self.cache) if self.uuid else '',
         ])
 
     def find_parent_task(self):
