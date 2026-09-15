@@ -1,5 +1,6 @@
 from taskwiki import constants
 from taskwiki import util
+from taskwiki.vwtask import convert_priority_from_tw_format
 
 class TaskSorter(object):
     def __init__(self, cache, tasks, sortstring=None):
@@ -89,6 +90,12 @@ class CustomNodeComparator(object):
             # Pick the values we are supposed to sort on
             first_value = first.vwtask[sort_attr]
             second_value = second.vwtask[sort_attr]
+
+            # Priority magnitude is defined by convert_priority_from_tw_format,
+            # not by alphabetical ordering of the priority strings
+            if sort_attr == 'priority':
+                first_value = convert_priority_from_tw_format(first_value)
+                second_value = convert_priority_from_tw_format(second_value)
 
             # Swap the method of the sort if reversed is True
             if method == 'gt' and reverse == True:
